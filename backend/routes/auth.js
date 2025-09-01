@@ -11,7 +11,7 @@ const router = express.Router();
 // Send OTP for signup
 router.post("/signup/send-otp", async (req, res) => {
     try {
-        const { email, name, dateOfBirth } = req.body;
+        const { name, email, dateOfBirth } = req.body;
 
         if (!email || !name || !dateOfBirth) {
             return res.status(400).json({ message: "All fields are required" });

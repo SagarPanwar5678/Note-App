@@ -3,6 +3,17 @@ const router = express.Router();
 const Note = require("../models/Note");
 const verifyToken = require("../middleware/auth"); // middleware to check JWT
 
+
+// ---------------- GET ALL NOTES FOR LOGGED-IN USER ----------------
+router.get("/fetch", verifyToken, async (req, res) => {
+  try {
+    const notes = await Note.find({ user: req.user.id }).sort({ createdAt: -1 });
+    res.json({ notes });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 // ---------------- CREATE NOTE ----------------
 router.post("/create", verifyToken, async (req, res) => {
   try {
