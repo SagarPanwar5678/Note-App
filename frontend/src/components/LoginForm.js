@@ -1,0 +1,52 @@
+// src/components/LoginForm.js
+import { useState } from "react";
+import API from "../utils/api";
+
+export default function LoginForm({ setUser }) {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({ email: "", otp: "" });
+  const [message, setMessage] = useState("");
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const sendOtp = async () => {
+    try {
+      const res = await API.post("/login/send-otp", { email: formData.email });
+      setMessage(res.data.message);
+      setStep(2);
+    } catch (err) {
+      setMessage(err.response?.data?.message || "Error sending OTP");
+    }
+  };
+
+  const verifyOtp = async () => {
+    try {
+      const res = await API.post("/login/verify-otp", { email: formData.email, otp: formData.otp });
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      setUser(res.data.user);
+    } catch (err) {
+      setMessage(err.response?.data?.message || "Error verifying OTP");
+    }
+  };
+
+  return (
+    <div style={{ maxWidth: "400px", margin: "50px auto" }}>
+      {step === 1 ? (
+        <div>
+          <h2>Sign in</h2>
+          <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} style={{ display: "block", marginBottom: "10px", width: "100%" }} />
+          <button onClick={sendOtp}>Send OTP</button>
+          <p>{message}</p>
+        </div>
+      ) : (
+        <div>
+          <h2>Enter OTP</h2>
+          <input type="text" name="otp" placeholder="OTP" value={formData.otp} onChange={handleChange} style={{ display: "block", marginBottom: "10px", width: "100%" }} />
+          <button onClick={verifyOtp}>Verify OTP</button>
+          <p>{message}</p>
+        </div>
+      )}
+    </div>
+  );
+}
