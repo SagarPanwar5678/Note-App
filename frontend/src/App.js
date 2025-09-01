@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userData = localStorage.getItem("user");
+    if (token && userData) {
+      setUser(JSON.parse(userData));
+    }
+    else{
+      console.log("something is off")
+    }
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Dashboard user={user} setUser={setUser} />
     </div>
   );
 }
 
 export default App;
+
+
