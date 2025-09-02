@@ -25,7 +25,7 @@ router.post("/create", verifyToken, async (req, res) => {
     const note = new Note({
       title,
       content,
-      userId: req.user.id // from JWT middleware
+      user: req.user.id // from JWT middleware
     });
 
     await note.save();
@@ -41,7 +41,7 @@ router.delete("/delete/:id", verifyToken, async (req, res) => {
   try {
     const noteId = req.params.id;
 
-    const note = await Note.findOne({ _id: noteId, userId: req.user.id });
+    const note = await Note.findOne({ _id: noteId, user: req.user.id });
     if (!note) return res.status(404).json({ message: "Note not found" });
 
     await note.deleteOne();

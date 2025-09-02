@@ -1,0 +1,176 @@
+
+
+/* Header with logo + HD */
+.header {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+/* Container split */
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.left-side {
+  width: 50%;
+  padding: 100px 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* Form elements */
+h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.input-group label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background: #fff;
+  padding: 0 5px;
+  font-size: 13px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.input-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.input-group input:focus + label {
+  color: #007bff;
+}
+
+.right-side{
+  height: 100%;
+  width: 50%;
+
+}
+.right-side img{
+  height: 730px;
+  width: 100%;
+}
+img{
+  height: 100%;
+  width: 100%;
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn.blue {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn.blue:hover {
+  background-color: #0056b3;
+}
+
+/* Sign in text */
+.signin-text {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.signin-text p {
+  cursor: pointer;
+  display: inline;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signin-text p:hover {
+  text-decoration: underline;
+}
+
+/* Make form narrower */
+.signup-form {
+  width: 320px;
+}
+
+.signin-text p{
+    text-decoration: underline;
+}
+
+/* 📱 Responsive (Mobile < 768px) */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left-side {
+    width: 100%;
+    padding: 0px 20px;
+  }
+
+  .right-side {
+    display: none; /* hide image */
+  }
+
+  .header {
+    position: static; /* remove absolute */
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .signup-form {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .header {
+    left: 30px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+

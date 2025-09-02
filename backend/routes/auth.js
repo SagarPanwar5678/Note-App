@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const redisClient = require("../utils/redis");
 const sendOTP = require("../utils/mail");
+const verifyToken = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -106,12 +107,18 @@ router.post("/login/verify-otp", async (req, res) => {
         await redisClient.del(email);
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        console.log("Everything fine");
 
         res.json({ message: "Login successful", token, user });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Server error" });
     }
+});
+
+// ----------------------check token ----------------
+router.post("/token/check",verifyToken,async(req,res)=>{
+    res.json({message: "Token Is Valid"});
 });
 
 module.exports = router;
