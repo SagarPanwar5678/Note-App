@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000", // change if your backend deployed
+  baseURL: process.env.REACT_APP_API_URL, // change if your backend deployed
   timeout: 10000,
 });
 
