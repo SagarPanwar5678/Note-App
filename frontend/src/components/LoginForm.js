@@ -69,6 +69,7 @@ export default function LoginForm({ setUser,setShowSignup }) {
       setMessage(res.data.message);
       setStep(2);
     } catch (err) {
+      console.log(err);
       setMessage(err.response?.data?.message || "Error sending OTP");
     }
   };
