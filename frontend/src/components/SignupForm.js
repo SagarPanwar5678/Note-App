@@ -95,6 +95,7 @@ export default function SignupForm({ setUser,setShowSignup }) {
       setMessage(res.data.message);
       setStep(2);
     } catch (err) {
+      console.log(err);
       setMessage(err.response?.data?.message || "Error sending OTP");
     }
   };
@@ -109,6 +110,7 @@ export default function SignupForm({ setUser,setShowSignup }) {
       localStorage.setItem("user", JSON.stringify(res.data.user));
       setUser(res.data.user);
     } catch (err) {
+      console.log(err);
       setMessage(err.response?.data?.message || "Error verifying OTP");
     }
   };
