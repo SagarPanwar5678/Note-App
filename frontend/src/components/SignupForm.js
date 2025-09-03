@@ -100,7 +100,8 @@ export default function SignupForm({ setUser,setShowSignup }) {
     }
   };
 
-  const verifyOtp = async () => {
+  const verifyOtp = async (e) => {
+    e.preventDefault();
     try {
       const res = await API.post("/api/auth/signup/verify-otp", {
         email: formData.email,
