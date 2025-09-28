@@ -48,37 +48,35 @@ import SignupForm from "../components/SignupForm";
 import LoginForm from "../components/LoginForm";
 import Notes from "../components/Notes";
 
-export default function Dashboard({ user, setUser,token,setToken }) {
+export default function Dashboard({ user, setUser, token, setToken }) {
   const [showSignup, setShowSignup] = useState(false);
 
-  if (!user) {
+  if (!user || !token) {
     return (
       <>
         {showSignup ? (
           <>
-            <SignupForm setUser={setUser} setShowSignup={setShowSignup}/>
+            <SignupForm setUser={setUser} setShowSignup={setShowSignup} />
           </>
         ) : (
           <>
-            <LoginForm setUser={setUser} setShowSignup={setShowSignup}/>
+            <LoginForm
+              setUser={setUser}
+              setShowSignup={setShowSignup}
+              setToken={setToken}
+            />
           </>
         )}
-        </>
-
-
+      </>
     );
   }
-  if(!token){
-    return <LoginForm setUser={setUser} setShowSignup={setShowSignup}/>
-
+  if (!token) {
+    return <LoginForm setUser={setUser} setShowSignup={setShowSignup} />;
   }
-
-
 
   return (
     <div>
-      <Notes user={user} setToken={setToken}/>
+      <Notes user={user} setToken={setToken} />
     </div>
   );
 }
-
