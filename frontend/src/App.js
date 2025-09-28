@@ -33,6 +33,7 @@ function App() {
         } else {
           setTOKEN(null);
           localStorage.removeItem("token");
+          localStorage.removeItem("user");
         }
       }
     };
